@@ -2,12 +2,10 @@ import logging
 from audiocraft.models import musicgen
 import torch
 import torchaudio
-from datetime import datetime  # Import the datetime module
+from datetime import datetime
 
-# Ensure torchaudio is installed: pip install torchaudio
-
-# Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
 
 def save_audio(samples: torch.Tensor, sample_rate: int, base_filename: str = "output_audio"):
     """Saves audio samples as WAV files with a timestamp in the filename.
@@ -38,13 +36,17 @@ def save_audio(samples: torch.Tensor, sample_rate: int, base_filename: str = "ou
 
 # List of prompts
 prompts = [
-    'a light and cheerly EDM track, with syncopated drums, aery pads, and strong emotions',
+    'Provide a build-up that elevates the anticipation before a euphoric chorus in a classic composition.',
+    'Create an infectious and energetic synth melody for a club banger.',
+    'Generate a bridge that transitions smoothly from a soft verse to a loud chorus with multiple instruments.',
+    'Provide a build-up that elevates the anticipation before a euphoric chorus for a trance track.',
+    'Provide a dynamic and intense build-up for a fiddle solo composition from soft to hard.',
 
 ]
 
 # Load the model
 model = musicgen.MusicGen.get_pretrained('facebook/musicgen-melody', device='cpu')
-model.set_generation_params(duration=8)
+model.set_generation_params(duration=30)
 
 # Generate music for each prompt with logging
 for i, prompt in enumerate(prompts, start=1):
