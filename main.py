@@ -40,13 +40,20 @@ prompts = [
     'Create an infectious and energetic synth melody for a club banger.',
     'Generate a bridge that transitions smoothly from a soft verse to a loud chorus with multiple instruments.',
     'Provide a build-up that elevates the anticipation before a euphoric chorus for a trance track.',
-    'Provide a dynamic and intense build-up for a fiddle solo composition from soft to hard.',
+    'Provide a dynamic and intense build-up for a piano anthem.',
 
 ]
 
 # Load the model
-model = musicgen.MusicGen.get_pretrained('facebook/musicgen-melody', device='cpu')
+model = musicgen.MusicGen.get_pretrained('facebook/musicgen-medium', device='cpu')
 model.set_generation_params(duration=30)
+
+
+def load_user_audio(file_path: str):
+    """Load a user-provided audio file."""
+    waveform, sample_rate = torchaudio.load(file_path)
+    return waveform, sample_rate
+
 
 # Generate music for each prompt with logging
 for i, prompt in enumerate(prompts, start=1):
