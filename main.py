@@ -45,7 +45,7 @@ prompts = [
 ]
 
 # Load the model
-model = musicgen.MusicGen.get_pretrained('facebook/musicgen-medium', device='cpu')
+model = musicgen.MusicGen.get_pretrained('facebook/musicgen-small', device='cpu')
 model.set_generation_params(duration=30)
 
 
